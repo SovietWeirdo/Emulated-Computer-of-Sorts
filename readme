@@ -2,3 +2,4 @@ So, this thing is the first "release" of the emulated computer i'm making. I hav
 Funny thing is, the only thing you can program is NOP (no operation) BRK (literally stops the emulated computer from running) and 
 JMP (which starts executing code one byte AFTER the specified byte number.
 I may work on a tool for automating the ROM generation.
+Oh and also, the screen has a weird effect which makes it turn off and on.
