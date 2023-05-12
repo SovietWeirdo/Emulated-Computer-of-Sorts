@@ -1,0 +1,3 @@
+8000 - FFFF: ROM (You write the program in this space)
+6000 - 7FFF: RAM (Programs may freely use this to store and use data)
+5D00 - 5FFF: VRAM (Used for the exact purpose of writing to the display)
