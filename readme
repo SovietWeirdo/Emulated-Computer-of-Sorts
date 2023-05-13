@@ -1,5 +1,5 @@
-So, this thing is the first "release" of the emulated computer i'm making. I have no idea when V1 will be released however.
-Funny thing is, the only thing you can program is NOP (no operation) BRK (literally stops the emulated computer from running) and 
-JMP (which starts executing code one byte AFTER the specified byte number.
-I may work on a tool for automating the ROM generation.
-Oh and also, the screen has a weird effect which makes it turn off and on.
+Alright, this is a step towards Version 1.
+I've added the MOV instruction which basically works like this: [ROMADDRESS1]: mov [ROMADDRESS2]: [RAM/VRAM address] [ROMADDRESS3]: [DATA]
+The JMP instruction should go to the proper ROM address now.
+In main.py i have commented out the function which makes the screen flash.
+The ROM has come preloaded with a program that makes the first pixel on the display off.
