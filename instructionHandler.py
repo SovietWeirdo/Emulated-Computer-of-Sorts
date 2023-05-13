@@ -16,7 +16,6 @@ def handle(address):
     tryExecute = True
   else:
     sys.exit("address not in rom")
-  print(address)
   if tryExecute and instructionHanderData["jmp_flag"] == True:
     instruction = rom[address]
     if len(instruction) == 4:
