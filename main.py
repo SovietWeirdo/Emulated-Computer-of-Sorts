@@ -26,6 +26,5 @@ while True:
   programCounter = int(programAddress,16)
   if programAddress == 'FFFF':
     sys.exit("Tried to access memory out of the 0000-FFFF range")
-  print(programAddress)
   #videocard.loadScreen(DISPLAYSURF)
   videocard.frame(DISPLAYSURF)
