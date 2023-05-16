@@ -1,6 +1,2 @@
-Alright, this is a step towards Version 1.
-I've added the MOV instruction which basically works like this: [ROMADDRESS1]: mov [ROMADDRESS2]: [RAM/VRAM address] [ROMADDRESS3]: [DATA]
-The JMP instruction should go to the proper ROM address now.
-In main.py i have commented out the function which makes the screen flash.
-The ROM has come preloaded with a program that makes the first pixel on the display off.
-Also the terminal no longer displays what ROM address is being read
+Added support for sound, [aplay]. To use this you first put 'aplay' then in the next byte put the path to the audio file.
+The ROM comes preloaded with a special animation :)
