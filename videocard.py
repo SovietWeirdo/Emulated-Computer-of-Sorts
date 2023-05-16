@@ -30,7 +30,7 @@ def frame(display):
         pygame.draw.rect(display,(255,255,255),(x*10,y*10,(x+1)*10,(y+1)*10))
       else:
         pygame.draw.rect(display,(0,0,0),(x*10,y*10,(x+1)*10,(y+1)*10))
-      pygame.display.update()
+  pygame.display.update()
 
 def loadScreen(display):
   if card_info["loadScreenState"] == 0:

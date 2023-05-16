@@ -1,6 +1,7 @@
 from ROM import rom
 from RAM import ram, vram
-import sys
+import sys, time
+from pygame import mixer
 
 instructionHanderData = {
   "instruction": "",
@@ -8,7 +9,11 @@ instructionHanderData = {
   "jmp_flag": False,
   "mov_flag": False,
   "mov_address/mov_data": True,
-  "mov_address": '0000'
+  "mov_address": '0000',
+  "wait_flag": False,
+  "print_flag": False,
+  "playaudio_flag": False,
+  "audiopath": ''
 }
 def handle(address):
   tryExecute = False
@@ -24,6 +29,7 @@ def handle(address):
       instructionHanderData["jmp_flag"] = False
       instructionHanderData["any_flag"] = False
       goto = int(instruction, 16)
+      goto -= 1
       instruction = hex(goto)
       instruction = instruction[2:6]
       instruction = instruction.upper()
@@ -55,6 +61,31 @@ def handle(address):
         return address
       else:
         sys.exit("ERROR: Invalid address for MOV operation")
+  if tryExecute and instructionHanderData["wait_flag"] == True:
+    instruction = rom[address]
+    try:
+      time.sleep(float(instruction))
+    except:
+      sys.exit("ERROR: invalid time for wait")
+    instructionHanderData["any_flag"] = False
+    instructionHanderData["wait_flag"] = False
+    instructionHanderData["instruction"] = ''
+    return address
+  if tryExecute and instructionHanderData["print_flag"] == True:
+    instruction = rom[address]
+    print(instruction)
+    instructionHanderData["instruction"] = ""
+    instructionHanderData["print_flag"] = False
+    instructionHanderData["any_flag"] = False
+    return address
+  if tryExecute and instructionHanderData["playaudio_flag"] == True:
+    instructionHanderData["audiopath"] = rom[address]
+    audio = mixer.Sound(instructionHanderData["audiopath"])
+    audio.play()
+    instructionHanderData["audiopath"] = ''
+    instructionHanderData["playaudio_flag"] = False
+    instructionHanderData["any_flag"] = False
+    return address
   if tryExecute and instructionHanderData["any_flag"] == False:
     instruction = rom[address]
     if instruction == "nop":
@@ -66,6 +97,18 @@ def handle(address):
     if instruction == "mov":
       instructionHanderData["instruction"] += "mov "
       instructionHanderData["mov_flag"] = True
+      instructionHanderData["any_flag"] = True
+    if instruction == "wait":
+      instructionHanderData["instruction"] += "wait "
+      instructionHanderData["wait_flag"] = True
+      instructionHanderData["any_flag"] = True
+    if instruction == "print":
+      instructionHanderData["instruction"] += "print "
+      instructionHanderData["print_flag"] = True
+      instructionHanderData["any_flag"] = True
+    if instruction == "aplay":
+      instructionHanderData["instruction"] += "play "
+      instructionHanderData["playaudio_flag"] = True
       instructionHanderData["any_flag"] = True
     if instruction == "brk":
       sys.exit("BRK command found: brk is used to stop the computer")
